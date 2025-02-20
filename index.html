@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticketing Center</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Book Your Ticket</h1>
+        <form id="ticketForm">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+            <label for="email">Email Address:</label>
+            <input type="text" id="email" name="email" placeholder="Enter your email" required>
+
+            <label for="ticketType">Ticket Type:</label>
+            <select id="ticketType" name="ticketType">
+                <option value="Standard">Standard</option>
+                <option value="VIP">VIP</option>
+                <option value="Student">Student</option>
+            </select>
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" min="1" required>
+
+            <button type="submit">Submit Ticket</button>
+        </form>
+
+        <div id="confirmation" class="message"></div>
+    </div>
+
+    <script>
+        document.getElementById("ticketForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Get form data
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const ticketType = document.getElementById("ticketType").value;
+            const quantity = document.getElementById("quantity").value;
+
+            // Validation (ensure data is entered correctly)
+            if (!name || !email || !ticketType || !quantity) {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            // Generate confirmation message
+            const confirmationMessage = `
+                Thank you, ${name}!<br>
+                Your booking for ${quantity} ${ticketType} ticket(s) has been confirmed.<br>
+                A confirmation email has been sent to ${email}.
+            `;
+
+            // Display confirmation
+            document.getElementById("confirmation").innerHTML = confirmationMessage;
+
+            // Optionally, reset form after submission
+            document.getElementById("ticketForm").reset();
+        });
+    </script>
+</body>
+</html>
